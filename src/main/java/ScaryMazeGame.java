@@ -8,7 +8,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class ScaryMazeGame extends JComponent implements MouseMotionListener {
+public class ScaryMazeGame extends JComponent implements MouseMotionListener,
+        MouseListener {
 
     BufferedImage intro;
     BufferedImage level1;
@@ -38,6 +39,7 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
         window.setVisible(true);
 
         game.addMouseMotionListener(game);
+        game.addMouseListener(game);
     }
 
     @Override
@@ -99,5 +101,29 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
     private void showGameOver() {
         scream.play();
         currentLevel = gameOver;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (currentLevel == gameOver) {
+            currentLevel = intro;
+        }
+        repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }
