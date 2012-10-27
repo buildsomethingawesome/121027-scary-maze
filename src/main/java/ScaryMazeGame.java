@@ -1,7 +1,9 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,6 +16,7 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
     BufferedImage level3;
     BufferedImage gameOver;
     BufferedImage currentLevel;
+    AudioClip scream = JApplet.newAudioClip(getClass().getResource("scream.aiff"));
 
     public ScaryMazeGame() throws IOException {
         intro = ImageIO.read(getClass().getResource("Intro.png"));
@@ -84,12 +87,17 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
             currentLevel = intro;
         }
         if (color == level2WallColor) {
-            currentLevel = gameOver;
+            showGameOver();
         }
         if (color == level3WallColor) {
-            currentLevel = gameOver;
+            showGameOver();
         }
 
         repaint();
+    }
+
+    private void showGameOver() {
+        scream.play();
+        currentLevel = gameOver;
     }
 }
