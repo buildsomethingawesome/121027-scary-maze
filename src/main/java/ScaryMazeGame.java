@@ -10,12 +10,16 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
 
     BufferedImage intro;
     BufferedImage level1;
+    BufferedImage level2;
+    BufferedImage level3;
     BufferedImage gameOver;
     BufferedImage currentLevel;
 
     public ScaryMazeGame() throws IOException {
         intro = ImageIO.read(getClass().getResource("Intro.png"));
         level1 = ImageIO.read(getClass().getResource("Level 1.png"));
+        level2 = ImageIO.read(getClass().getResource("Level 2.png"));
+        level3 = ImageIO.read(getClass().getResource("Level 3.png"));
         gameOver = ImageIO.read(getClass().getResource("Game Over.jpg"));
 
         currentLevel = intro;
@@ -62,13 +66,27 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
 
         System.out.println(color);
 
-        int goalColor = -15549808;
         int level1WallColor = -4758784;
+        int level2WallColor = -9628998;
+        int level3WallColor = -7272684;
+        int goalColor = -15549808;
 
         if (color == goalColor) {
-            currentLevel = level1;
+            if (currentLevel == intro) {
+                currentLevel = level1;
+            } else if (currentLevel == level1) {
+                currentLevel = level2;
+            } else if (currentLevel == level2) {
+                currentLevel = level3;
+            }
         }
         if (color == level1WallColor) {
+            currentLevel = intro;
+        }
+        if (color == level2WallColor) {
+            currentLevel = gameOver;
+        }
+        if (color == level3WallColor) {
             currentLevel = gameOver;
         }
 
