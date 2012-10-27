@@ -62,10 +62,13 @@ public class ScaryMazeGame extends JComponent implements MouseMotionListener {
 
         System.out.println(color);
 
-        if (color == -15549808) {
+        int goalColor = -15549808;
+        int level1WallColor = -4758784;
+
+        if (color == goalColor) {
             currentLevel = level1;
         }
-        if (color == -4758784) {
+        if (color == level1WallColor) {
             currentLevel = gameOver;
         }
 
